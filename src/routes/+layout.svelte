@@ -148,10 +148,7 @@
 </script>
 
 <svelte:head>
-  <meta
-    name="description"
-    content="Sumatif Informatika Kelas 11 Kuartal I"
-  /><script>
+  <script>
     if (
       localStorage.getItem("color-theme") === "dark" ||
       (!("color-theme" in localStorage) &&
@@ -161,8 +158,8 @@
     } else {
       document.documentElement.classList.remove("dark");
     }
-  </script></svelte:head
->
+  </script>
+</svelte:head>
 
 <div class="fixed w-full bg-white dark:bg-slate-800 z-30">
   <nav
