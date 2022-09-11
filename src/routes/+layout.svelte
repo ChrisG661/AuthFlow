@@ -14,13 +14,9 @@
   onMount(() => {
     if (browser) {
       $userSession = supabase.auth.session();
-      console.log($page);
-      console.log($userSession);
-      console.log($page.url.hash);
       supabase.auth.onAuthStateChange((event, session) => {
         authEvent = event;
         $userSession = session;
-        console.log($userSession);
       });
       mounted = true;
     }
