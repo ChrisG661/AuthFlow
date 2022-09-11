@@ -1,9 +1,12 @@
 <script>
   import { goto } from "$app/navigation";
   import StackLogo from "$lib/stacklogo-line.svelte";
-  import { draw } from "svelte/transition";
+  import { draw, slide } from "svelte/transition";
   import { page } from "$app/stores";
   import { onMount } from "svelte";
+  import svelteIcon from "$lib/assets/svelte-logo-icon.svg";
+  import tailwindCSSIcon from "$lib/assets/tailwindcss-logo-icon.svg";
+  import supabaseIcon from "$lib/assets/supabase-logo-icon.svg";
 
   let animate = false;
   let animateParams = { duration: 1200 };
@@ -78,8 +81,36 @@
     <p
       class="text-center mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"
     >
-      Aplikasi autentikasi dalam framework SvelteKit dan TailwindCSS
+      Aplikasi autentikasi dalam SvelteKit, TailwindCSS, dan Supabase
     </p>
+    <div class="flex flex-row items-center h-24 mb-6 gap-x-4">
+      {#if animate}
+        <a href="https://kit.svelte.dev"
+          ><img
+            src={svelteIcon}
+            alt="SvelteKit"
+            class="h-24"
+            in:slide={{ delay: 100 }}
+          /></a
+        >
+        <a href="https://tailwindcss.com"
+          ><img
+            src={tailwindCSSIcon}
+            alt="TailwindCSS"
+            class="w-24 "
+            in:slide={{ delay: 150 }}
+          /></a
+        >
+        <a href="https://supabase.com"
+          ><img
+            src={supabaseIcon}
+            alt="Supabase"
+            class="h-20"
+            in:slide={{ delay: 200 }}
+          /></a
+        >
+      {/if}
+    </div>
     <a
       href="/masuk"
       class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
