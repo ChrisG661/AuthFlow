@@ -8,6 +8,7 @@
 
   let loading = true;
   let valid = true;
+  let email = "";
   let username = "";
   let avatarUrl = "";
   let message = {
@@ -31,6 +32,7 @@
           if (data) {
             username = data.username;
             avatarUrl = data.avatar_url;
+            email = $userSession.user?.email;
           }
           if (error && status !== 406) throw error;
         });
@@ -122,7 +124,7 @@
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 focus:outline-none focus:ring-0"
             placeholder=" "
             required
-            value={$userSession.user?.email}
+            value={email}
             disabled
           />
           <label
