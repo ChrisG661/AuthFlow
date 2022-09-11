@@ -97,8 +97,9 @@
       }
     });
   });
-  let avatarUrl = "";
-  let username = "";
+
+  let userProfile = { avatarUrl: "", name: "", initials: "" };
+
   const getProfile = (node) => {
     try {
       //loading = true;
@@ -111,8 +112,13 @@
         .single()
         .then(({ data, error, status }) => {
           if (data) {
-            username = data.username;
-            avatarUrl = data.avatar_url;
+            userProfile.name = data.username;
+            userProfile.avatarUrl = data.avatar_url;
+            let initials =
+              [...userProfile.name.matchAll(/([a-zA-Z]?)[a-zA-Z]+/gu)] || [];
+            userProfile.initials = (
+              (initials.shift()?.[1] || "") + (initials.pop()?.[1] || "")
+            ).toUpperCase();
           }
           if (error && status !== 406) throw error;
         });
@@ -122,13 +128,14 @@
       //loading = false;
     }
   };
+
   const downloadImage = (e) => {
     supabase.storage
       .from("avatars")
-      .download(avatarUrl)
+      .download(userProfile.avatarUrl)
       .then(({ data, error }) => {
         if (error) throw error;
-        avatarUrl = URL.createObjectURL(data);
+        userProfile.avatarUrl = URL.createObjectURL(data);
       })
       .catch((error) => {
         console.error("Gagal mengunduh foto: ", error.message, error);
@@ -175,13 +182,15 @@
           data-dropdown-toggle="user-dropdown"
           data-dropdown-placement="bottom"
         >
-          {#if avatarUrl}
+          {#if userProfile.avatarUrl}
             <div
               use:downloadImage
               class="overflow-clip w-8 h-8 bg-gray-300 rounded-full dark:bg-slate-700"
             >
-              <img src={avatarUrl} alt="Foto profil" />
+              <img src={userProfile.avatarUrl} alt="Foto profil" />
             </div>
+          {:else if userProfile.name}
+            <DefaultAvatar class="w-8 h-8" initials={userProfile.initials} />
           {:else}
             <DefaultAvatar class="w-8 h-8" />
           {/if}
@@ -196,9 +205,9 @@
         >
           <div class="px-4 py-3">
             {#if $userSession}
-              {#if username}
+              {#if userProfile.name}
                 <span class="block text-sm text-gray-900 dark:text-white"
-                  >{username}</span
+                  >{userProfile.name}</span
                 >{/if}
               <span
                 class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400"

@@ -67,10 +67,10 @@
     />
   {/if}
   <div>
-    <button
+    <label
       type="button"
       for="avatar-upload"
-      class="absolute z-10 -right-2 bottom-0 text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      class="absolute z-10 -right-2 bottom-0 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     >
       {#if uploading}
         <LoadingIcon class="w-4 h-4" />
@@ -86,7 +86,7 @@
           />
         </svg>
       {/if}
-    </button>
+    </label>
     <input
       class="invisible absolute"
       type="file"
