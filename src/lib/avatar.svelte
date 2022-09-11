@@ -4,7 +4,7 @@
   import DefaultAvatar from "$lib/default-avatar.svelte";
   import LoadingIcon from "$lib/loading-icon.svelte";
 
-  export let path;
+  export let path = "";
 
   let uploading = false;
   let src = "";
@@ -41,8 +41,11 @@
       let { error: uploadError } = await supabase.storage
         .from("avatars")
         .upload(filePath, file);
-
       if (uploadError) throw uploadError;
+
+      let { data, error } = await supabase.storage
+        .from("avatars")
+        .remove([path]);
 
       path = filePath;
       dispatch("upload");
@@ -56,11 +59,13 @@
 
 <div class="relative w-32">
   {#if path}
-    <div
-      class="overflow-clip h-32 w-32 bg-gray-300 rounded-full dark:bg-slate-700"
-    >
-      <img use:downloadImage {src} alt="Foto profil" class="avatar" />
-    </div>
+    {#key path}
+      <div
+        class="overflow-clip h-32 w-32 bg-gray-300 rounded-full dark:bg-slate-700"
+      >
+        <img use:downloadImage {src} alt="Foto profil" class="avatar" />
+      </div>
+    {/key}
   {:else}
     <DefaultAvatar
       class="w-32 h-32 p-1 bg-gray-300 rounded-full fill-white dark:bg-slate-700 dark:fill-slate-500"
