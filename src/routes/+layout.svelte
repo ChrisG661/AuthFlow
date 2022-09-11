@@ -147,8 +147,11 @@
   };
 </script>
 
-<svelte:head
-  ><script>
+<svelte:head>
+  <meta
+    name="description"
+    content="Sumatif Informatika Kelas 11 Kuartal I"
+  /><script>
     if (
       localStorage.getItem("color-theme") === "dark" ||
       (!("color-theme" in localStorage) &&
