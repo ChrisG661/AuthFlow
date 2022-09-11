@@ -4,6 +4,7 @@
   import Avatar from "$lib/avatar.svelte";
   import StackLogo from "$lib/stacklogo-line.svelte";
   import LoadingIcon from "$lib/loading-icon.svelte";
+  import { fly } from "svelte/transition";
 
   let loading = true;
   let valid = true;
@@ -148,6 +149,16 @@
             >Nama</label
           >
         </div>
+        {#if message.success}
+          <p class="mb-2 text-sm text-blue-400" transition:fly>
+            {message.success}
+          </p>
+        {/if}
+        {#if message.error}
+          <p class="mb-2 text-sm text-red-400" transition:fly>
+            {message.error}
+          </p>
+        {/if}
         <button
           type="submit"
           disabled={!valid || loading}
