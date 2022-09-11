@@ -2,10 +2,19 @@
 // for information about these interfaces
 // and what to do when importing types
 declare namespace App {
-	// interface Locals {}
-	// interface PageData {}
-	// interface Platform {}
-	  interface UserSession {
+  // interface Locals {}
+  // interface PageData {}
+  // interface Platform {}
+  interface Platform {
+    env: {
+      COUNTER: DurableObjectNamespace;
+    };
+    context: {
+      waitUntil(promise: Promise<any>): void;
+    };
+    caches: CacheStorage & { default: Cache }
+  }
+  interface UserSession {
     user: import('@supabase/supabase-js').User
     accessToken?: string
   }
@@ -13,5 +22,5 @@ declare namespace App {
     error: import('@supabase/supabase-js').ApiError
   }
 
-  interface Session extends UserSession {} // interface Platform {} // interface Stuff {}
+  interface Session extends UserSession { } // interface Platform {} // interface Stuff {}
 }
