@@ -33,6 +33,7 @@
       if (authEvent != "SIGNED_IN") goto("/profil");
     }
     if (!$userSession) {
+      userProfile = { avatarUrl: "", name: "", initials: "" };
       switch ($page.routeId) {
         case "profil":
         case "atur-kata-sandi":
@@ -41,6 +42,9 @@
         default:
           break;
       }
+    }
+    if ($userSession) {
+      getProfile();
     }
   }
 
@@ -173,7 +177,7 @@
           >Christopher G</span
         >
       </a>
-      <div class="flex items-center md:order-2" use:getProfile>
+      <div class="flex items-center md:order-2">
         <button
           type="button"
           class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
