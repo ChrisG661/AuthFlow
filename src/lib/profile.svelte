@@ -32,7 +32,7 @@
           if (data) {
             username = data.username;
             avatarUrl = data.avatar_url;
-            email = $userSession.user?.email;
+            email = $userSession?.user?.email;
           }
           if (error && status !== 406) throw error;
         });

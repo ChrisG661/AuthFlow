@@ -188,10 +188,13 @@
         >
           {#if userProfile.avatarUrl}
             <div
-              use:downloadImage
               class="overflow-clip w-8 h-8 bg-gray-300 rounded-full dark:bg-slate-700"
             >
-              <img src={userProfile.avatarUrl} alt="Foto profil" />
+              <img
+                use:downloadImage
+                src={userProfile.avatarUrl}
+                alt="Foto profil"
+              />
             </div>
           {:else if userProfile.name}
             <DefaultAvatar class="w-8 h-8" initials={userProfile.initials} />
