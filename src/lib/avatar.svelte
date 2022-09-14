@@ -61,9 +61,14 @@
   {#if path}
     {#key path}
       <div
-        class="overflow-clip h-32 w-32 bg-gray-300 rounded-full dark:bg-slate-700"
+        class="overflow-clip  h-32 w-32 bg-gray-300 rounded-full dark:bg-slate-700"
       >
-        <img use:downloadImage {src} alt="Foto profil" class="avatar" />
+        <img
+          use:downloadImage
+          {src}
+          alt="Foto profil"
+          class="avatar aspect-square object-cover"
+        />
       </div>
     {/key}
   {:else}

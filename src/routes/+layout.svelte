@@ -191,7 +191,11 @@
               use:downloadImage
               class="overflow-clip w-8 h-8 bg-gray-300 rounded-full dark:bg-slate-700"
             >
-              <img src={userProfile.avatarSrc} alt="Foto profil" />
+              <img
+                src={userProfile.avatarSrc}
+                alt="Foto profil"
+                class="aspect-square object-cover"
+              />
             </div>
           {:else if userProfile.name}
             <DefaultAvatar class="w-8 h-8" initials={userProfile.initials} />
