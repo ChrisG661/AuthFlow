@@ -144,7 +144,6 @@
       .catch((error) => {
         console.error("Gagal mengunduh foto: ", error.message, error);
       });
-    console.dir(userProfile);
   };
 </script>
 
