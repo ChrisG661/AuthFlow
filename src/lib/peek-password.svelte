@@ -10,6 +10,12 @@
   on:mouseup|preventDefault={() => {
     show = false;
   }}
+  on:touchstart|preventDefault={() => {
+    show = true;
+  }}
+  on:touchend|preventDefault={() => {
+    show = false;
+  }}
   class="stroke-2 stroke-gray-500 dark:stroke-gray-400"
 >
   {#if show}
