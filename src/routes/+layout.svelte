@@ -102,7 +102,7 @@
     });
   });
 
-  let userProfile = { avatarUrl: "", name: "", initials: "" };
+  let userProfile = { avatarUrl: "", avatarSrc: "", name: "", initials: "" };
 
   const getProfile = (node) => {
     try {
@@ -139,11 +139,12 @@
       .download(userProfile.avatarUrl)
       .then(({ data, error }) => {
         if (error) throw error;
-        userProfile.avatarUrl = URL.createObjectURL(data);
+        userProfile.avatarSrc = URL.createObjectURL(data);
       })
       .catch((error) => {
         console.error("Gagal mengunduh foto: ", error.message, error);
       });
+    console.dir(userProfile);
   };
 </script>
 
@@ -188,13 +189,10 @@
         >
           {#if userProfile.avatarUrl}
             <div
+              use:downloadImage
               class="overflow-clip w-8 h-8 bg-gray-300 rounded-full dark:bg-slate-700"
             >
-              <img
-                use:downloadImage
-                src={userProfile.avatarUrl}
-                alt="Foto profil"
-              />
+              <img src={userProfile.avatarSrc} alt="Foto profil" />
             </div>
           {:else if userProfile.name}
             <DefaultAvatar class="w-8 h-8" initials={userProfile.initials} />
